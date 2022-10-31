@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package usermessages;
+
+option go_package = "base_service/internal/kafka";
+
+message UserUpdate {
+  string Username = 1;
+  string Email = 2;
+  string PhoneNumber = 3;
+}
+
+message UserUpdated {
+  string Username = 1;
+  string Email = 2;
+  string PhoneNumber = 3;
+}
+

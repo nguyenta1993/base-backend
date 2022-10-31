@@ -1,0 +1,67 @@
+serviceName: base_service
+development: false
+database:
+  readDb: 
+    connectionString: root:admin@tcp(readDb:3306)/baseservices?tls=skip-verify&autocommit=true
+    dbType: mysql
+    migrationFilePath: migrations
+  writeDb: 
+    connectionString: root:admin@tcp(writeDb:3306)/baseservices?tls=skip-verify&autocommit=true
+    dbType: mysql
+    migrationFilePath: migrations
+http:
+  port: :5000
+  development: false
+  shutdownTimeout: 15
+  resources: ["internal/resources/en.json",	"internal/resources/fr.json",	"internal/resources/vi.json"]
+  rateLimiting:
+    rateFormat: "4-H"
+grpc:
+  port: :5001
+  development: false
+  maxConnectionIdle: 5
+  timeout: 15
+  maxConnectionAge: 5
+  time: 10
+logger:
+  level: debug
+  devMode: false
+  encoder: json
+jaeger:
+  enable: true
+  serviceName: base_service
+  hostPort: "jaeger:6831"
+  logSpans: false
+kafka:
+  config:
+    brokers: ["kafka1:9092"]
+    groupID: base_service_consumer
+    initTopics: false
+    numWorker: 20
+  topics:    
+    userUpdate:
+      topicName: user_update
+      numPartitions: 10
+      replicationFactor: 1    
+    userUpdated:
+      topicName: user_updated
+      numPartitions: 10
+      replicationFactor: 1
+redis:
+  addrs: ["redis:6379"]
+  password: ""
+  db: 0
+  poolSize: 300
+heathcheck:
+  interval: 10
+  port: :6001
+  goroutineThreshold: 50
+metrics:
+  prometheusPath: /metrics
+  prometheusPort: :8001
+vault:
+  address: "https://vault.dev.tiki.services/"
+  path: "v1/kv/data/k8s/dev/s14e/baseservice/"
+  role: "default"
+  mountPoint: "s14e"
+    

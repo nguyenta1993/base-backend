@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "base_service/internal/grpc";
+
+// The request message containing the user's name.
+message GetUserRequest {
+  string username = 1;
+}
+
+// The response message containing the greetings
+message GetUserResponse {
+  string username = 1;
+  string email = 2;
+  string phonenumber = 3;
+}
+
+message UpdateUserRequest {
+  string username = 1;
+  string phonenumber = 2;  
+}
+  
+message UpdateUserResponse {
+  bool sucucess = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string phonenumber = 3;
+}
+
+message CreateUserResponse {
+  bool sucucess = 1;
+}

@@ -1,0 +1,9 @@
+zk-single-kafka-single
+.dockerignore
+.vscode
+.git
+.gitignore
+**/Dockerfile*
+LICENSE
+README.md
+Jenkinsfile

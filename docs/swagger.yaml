@@ -1,0 +1,43 @@
+definitions:
+  getuser.GetUserQuery:
+    properties:
+      username:
+        type: string
+    required:
+    - username
+    type: object
+  getuser.User:
+    properties:
+      email:
+        type: string
+      phoneNumber:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Get user by username
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/getuser.GetUserQuery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/getuser.User'
+      summary: Get user
+      tags:
+      - Users
+swagger: "2.0"

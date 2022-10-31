@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "base_service/internal/grpc";
+
+import "user_messages.proto";
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+}
