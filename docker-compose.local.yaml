@@ -29,21 +29,18 @@ services:
     ports:
       - 8080:8080
 
-  jaeger:
-    container_name: base_jaeger_container
-    restart: always
-    image: jaegertracing/all-in-one:1.21
-    environment:
-      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+  tempo:
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo-local.yaml:/etc/tempo.yaml
+      - ./tempo-data:/tmp/tempo
     ports:
-      - "5775:5775/udp"
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "5778:5778"
-      - "16686:16686"
-      - "14268:14268"
-      - "14250:14250"
-      - "9411:9411"
+      - "14268:14268"  # jaeger ingest
+      - "3200:3200"   # tempo
+      - "4317:4317"  # otlp grpc
+      - "4318:4318"  # otlp http
+      - "9411:9411"   # zipkin
 
   zoo1:
     image: confluentinc/cp-zookeeper:7.2.1
@@ -111,68 +108,3 @@ services:
     image: grafana/grafana
     ports:
       - '3000:3000'
-
-  lenses:
-    image: lensesio/lenses:latest
-    platform: linux/amd64
-    environment:
-      LENSES_PORT: 9991
-      LENSES_SECURITY_USER: admin
-      LENSES_SECURITY_PASSWORD: sha256:8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-      LENSES_KAFKA_BROKERS: "PLAINTEXT://kafka1:9092"
-    ports:
-      - 9991:9991
-      - 9102:9102
-#
-#  mongo:
-#    image: mongo:4.2
-#    networks:
-#      - graylog
-#  # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/7.10/docker.html
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
-#    environment:
-#      - http.host=0.0.0.0
-#      - transport.host=localhost
-#      - network.host=0.0.0.0
-#      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Xms512m -Xmx512m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 1g
-#    networks:
-#      - graylog
-#  # Graylog: https://hub.docker.com/r/graylog/graylog/
-#  graylog:
-#    image: graylog/graylog:4.3
-#    environment:
-#      # CHANGE ME (must be at least 16 characters)!
-#      - GRAYLOG_PASSWORD_SECRET=W(6h9nHeYW!A36Nw#JQs
-#      # Password: admin
-#      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-#      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
-#    entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
-#    networks:
-#      - graylog
-#    restart: always
-#    depends_on:
-#      - mongo
-#      - elasticsearch
-#    ports:
-#      # Graylog web interface and REST API
-#      - 9000:9000
-#      # Syslog TCP
-#      - 1514:1514
-#      # Syslog UDP
-#      - 1514:1514/udp
-#      # GELF TCP
-#      - 12201:12201
-#      # GELF UDP
-#      - 12201:12201/udp
-#networks:
-#  graylog:
-#    driver: bridge
