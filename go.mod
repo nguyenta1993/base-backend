@@ -131,6 +131,8 @@ require (
 	github.com/subosito/gotenv v1.4.1 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	github.com/ulule/limiter/v3 v3.10.0 // indirect
+	github.com/uptrace/opentelemetry-go-extra/otelsql v0.1.17 // indirect
+	github.com/uptrace/opentelemetry-go-extra/otelsqlx v0.1.17 // indirect
 	github.com/uptrace/opentelemetry-go-extra/otelutil v0.1.17 // indirect
 	github.com/uptrace/opentelemetry-go-extra/otelzap v0.1.17 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
@@ -145,6 +147,7 @@ require (
 	go.opentelemetry.io/otel/exporters/otlp/internal/retry v1.11.1 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.11.1 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.11.1 // indirect
+	go.opentelemetry.io/otel/metric v0.32.1 // indirect
 	go.opentelemetry.io/otel/sdk v1.11.1 // indirect
 	go.opentelemetry.io/otel/trace v1.11.1 // indirect
 	go.opentelemetry.io/proto/otlp v0.19.0 // indirect

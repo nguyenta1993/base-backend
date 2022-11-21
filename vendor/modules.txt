@@ -120,6 +120,7 @@ github.com/gogovan-korea/ggx-kr-service-utils/command/constants
 github.com/gogovan-korea/ggx-kr-service-utils/command/migration
 github.com/gogovan-korea/ggx-kr-service-utils/command/start
 github.com/gogovan-korea/ggx-kr-service-utils/config
+github.com/gogovan-korea/ggx-kr-service-utils/database
 github.com/gogovan-korea/ggx-kr-service-utils/grpc/client
 github.com/gogovan-korea/ggx-kr-service-utils/grpc/interceptors
 github.com/gogovan-korea/ggx-kr-service-utils/grpc/server
@@ -516,6 +517,12 @@ github.com/ulule/limiter/v3/drivers/middleware/gin
 github.com/ulule/limiter/v3/drivers/store/common
 github.com/ulule/limiter/v3/drivers/store/memory
 github.com/ulule/limiter/v3/internal/bytebuffer
+# github.com/uptrace/opentelemetry-go-extra/otelsql v0.1.17
+## explicit; go 1.18
+github.com/uptrace/opentelemetry-go-extra/otelsql
+# github.com/uptrace/opentelemetry-go-extra/otelsqlx v0.1.17
+## explicit; go 1.18
+github.com/uptrace/opentelemetry-go-extra/otelsqlx
 # github.com/uptrace/opentelemetry-go-extra/otelutil v0.1.17
 ## explicit; go 1.18
 github.com/uptrace/opentelemetry-go-extra/otelutil
@@ -609,6 +616,17 @@ go.opentelemetry.io/otel/exporters/otlp/otlptrace/internal/tracetransform
 # go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.11.1
 ## explicit; go 1.18
 go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
+# go.opentelemetry.io/otel/metric v0.32.1
+## explicit; go 1.18
+go.opentelemetry.io/otel/metric
+go.opentelemetry.io/otel/metric/global
+go.opentelemetry.io/otel/metric/instrument
+go.opentelemetry.io/otel/metric/instrument/asyncfloat64
+go.opentelemetry.io/otel/metric/instrument/asyncint64
+go.opentelemetry.io/otel/metric/instrument/syncfloat64
+go.opentelemetry.io/otel/metric/instrument/syncint64
+go.opentelemetry.io/otel/metric/internal/global
+go.opentelemetry.io/otel/metric/unit
 # go.opentelemetry.io/otel/sdk v1.11.1
 ## explicit; go 1.18
 go.opentelemetry.io/otel/sdk/instrumentation

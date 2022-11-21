@@ -5,7 +5,7 @@
 |--|--|--|
 |  Routing| /users   | [ ] |
 |Exposed Port| HTTP 5000 /api/{http route} <br> GRPC 5001 /{grpc route} | [ ] |
-|Health Check| :6001/live <br> :6001/ready | [ ] |
+|Health Check| liveliness :6001/live <br> readiness :6001/ready | [ ] |
 |Metrics| :8001/metrics | [ ] |
 |Dockerfile| dev: deployment/dev/Dockerfile <br> production: deployment/prod/Dockerfile | [ ] |
 |Dependency| [x] Database <br> [ ] Kafka <br> [ ] Redis | [ ] |
