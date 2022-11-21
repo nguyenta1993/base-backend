@@ -21,7 +21,7 @@ FROM alpine:3.16
 
 WORKDIR /app
 COPY --from=build /app/docs ./docs
-COPY --from=build /app/cw-user-service .
+COPY --from=build /app/base-backend .
 COPY --from=build /app/config ./config
 COPY --from=build /app/internal/resources ./internal/resources
 
