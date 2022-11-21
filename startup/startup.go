@@ -112,7 +112,7 @@ func start() {
 		},
 	)
 	// Init tracing
-	tracing.UseOpenTelemetry(tracing.Config(*cfg.Jaeger))
+	tracing.UseOpenTelemetryWithNewRelic(tracing.Config(*cfg.Jaeger))
 	// Init validation
 	validation.UseValidation(validation.CustomValidation{Tag: v.Tag, ValidatorFunc: v.AgeNotNegative})
 	// Run server

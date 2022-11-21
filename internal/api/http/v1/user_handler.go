@@ -49,7 +49,7 @@ func (h *UserHandler) GetUser(c *gin.Context) {
 		return
 	}
 
-	userResponse, err := h.service.UserService.GetUserHandler.Handle(c.Request.Context(), &user)
+	userResponse, err := h.service.UserService.GetUserHandler.Handle(c, &user)
 
 	if err != nil {
 		h.metrics.ErrorHttpRequests.Inc()

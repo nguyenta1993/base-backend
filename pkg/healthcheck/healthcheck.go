@@ -53,6 +53,7 @@ func readinessCheck(
 	redisClient redis.UniversalClient,
 	kafkaConn *kafka.Conn,
 ) {
+
 	health.AddReadinessCheck(constants.Redis, healthcheck.AsyncWithContext(ctx, func() error {
 		err := redisClient.Ping(ctx).Err()
 		return err
@@ -66,10 +67,4 @@ func readinessCheck(
 		return writeDb.DB.PingContext(ctx)
 	}, interval))
 
-	health.AddReadinessCheck(constants.Kafka, healthcheck.AsyncWithContext(ctx, func() error {
-		if _, err := kafkaConn.Brokers(); err != nil {
-			return err
-		}
-		return nil
-	}, interval))
 }

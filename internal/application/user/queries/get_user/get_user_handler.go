@@ -3,6 +3,7 @@ package getuser
 import (
 	interfaces "base_service/internal/domain/interfaces/user"
 	"context"
+	"fmt"
 	"github.com/gogovan-korea/ggx-kr-service-utils/tracing"
 	// Just exmple, in the real world, using https://github.com/gogovan-korea/s14e-backend-proto
 	proto "base_service/internal/api/grpc/proto_gen"
@@ -26,16 +27,12 @@ func NewGetUserHandler(
 }
 
 func (h *GetUserHandler) Handle(ctx context.Context, getUserQuery *GetUserQuery) (user *User, err error) {
-	ctx, span := tracing.StartSpanFromContext(ctx, "GetUserHandler.Handle")
-	defer func() {
-		span.RecordError(err)
-		span.End()
-	}()
+	seg := tracing.StartSegmentFromCtx(ctx, "GetUserHandler.Handle")
+	defer seg.End()
 
-	ctx = tracing.InjectTextMapCarrierToGrpcMetaData(ctx)
 	resp, err := h.userServiceClient.CreateUser(ctx, &proto.CreateUserRequest{Username: getUserQuery.Username})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Loi xay ra o day")
 	}
 	print(resp)
 	// Get from cache first

@@ -6,10 +6,10 @@ import (
 	entities "base_service/internal/domain/entities"
 	interfaces "base_service/internal/domain/interfaces/user"
 	"context"
+	"github.com/gogovan-korea/ggx-kr-service-utils/tracing"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/opentracing/opentracing-go"
 )
 
 type userQueryRepository struct {
@@ -21,8 +21,8 @@ func NewUserQueryRepository(readDb *database.ReadDb) interfaces.UserQueryReposit
 }
 
 func (repo *userQueryRepository) GetUser(ctx context.Context, username string) (*entities.User, error) {
-	span, ctx := opentracing.StartSpanFromContext(ctx, "userQueryRepository.GetUser")
-	defer span.Finish()
+	ctx, span := tracing.StartSpanFromContext(ctx, "userQueryRepository.GetUser")
+	defer span.End()
 
 	user := entities.User{}
 	err := repo.GetContext(ctx, &user, "SELECT * FROM user WHERE username=?", username)

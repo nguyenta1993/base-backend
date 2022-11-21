@@ -7,7 +7,7 @@ type AppConfig struct {
 	Http        *HttpConfig       `mapstructure:"http"`
 	GRPC        *GrpcConfig       `mapstructure:"grpc"`
 	Database    *DatabaseConfig   `mapstructure:"database"`
-	Jaeger      *JaegerConfig     `mapstructure:"jaeger"`
+	Tracing     *TracingConfig    `mapstructure:"tracing"`
 	Kafka       *KafkaConfig      `mapstructure:"kafka"`
 	Redis       *RedisConfig      `mapstructure:"redis"`
 	Heathcheck  *HeathcheckConfig `mapstructure:"heathcheck"`
@@ -58,11 +58,12 @@ type WriteDbConfig struct {
 	MigrationFilePath string `mapstructure:"migrationFilePath"`
 }
 
-type JaegerConfig struct {
+type TracingConfig struct {
 	ServiceName string `mapstructure:"serviceName"`
 	HostPort    string `mapstructure:"hostPort"`
 	Enable      bool   `mapstructure:"enable"`
 	LogSpans    bool   `mapstructure:"logSpans"`
+	ApiKey      string `mapstructure:"apiKey"`
 }
 
 type KafkaConfig struct {

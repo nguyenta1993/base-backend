@@ -27,11 +27,12 @@ logger:
   level: debug
   devMode: false
   encoder: json
-jaeger:
+tracing:
   enable: true
   serviceName: base_service
-  hostPort: "localhost:6831"
+  hostPort: "https://otlp.nr-data.net:443"
   logSpans: false
+  apiKey: be2b6c37a20b98b8815412b3fe3bb166e7d0NRAL
 kafka:
   config:
     brokers: ["localhost:9092"]

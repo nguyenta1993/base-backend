@@ -1,11 +1,11 @@
 serviceName: base_service
 development: false
 database:
-  readDb: 
+  readDb:
     connectionString: root:admin@tcp(readDb:3306)/baseservices?tls=skip-verify&autocommit=true
     dbType: mysql
     migrationFilePath: migrations
-  writeDb: 
+  writeDb:
     connectionString: root:admin@tcp(writeDb:3306)/baseservices?tls=skip-verify&autocommit=true
     dbType: mysql
     migrationFilePath: migrations
@@ -27,7 +27,7 @@ logger:
   level: debug
   devMode: false
   encoder: json
-jaeger:
+tracing:
   enable: true
   serviceName: base_service
   hostPort: "jaeger:6831"
@@ -38,11 +38,11 @@ kafka:
     groupID: base_service_consumer
     initTopics: false
     numWorker: 20
-  topics:    
+  topics:
     userUpdate:
       topicName: user_update
       numPartitions: 10
-      replicationFactor: 1    
+      replicationFactor: 1
     userUpdated:
       topicName: user_updated
       numPartitions: 10
@@ -64,4 +64,3 @@ vault:
   path: "v1/kv/data/k8s/dev/s14e/baseservice/"
   role: "default"
   mountPoint: "s14e"
-    

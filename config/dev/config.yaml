@@ -1,11 +1,11 @@
 serviceName: base_service
 development: false
 database:
-  readDb: 
+  readDb:
     connectionString: VAULT_DATA
     dbType: mysql
     migrationFilePath: migrations
-  writeDb: 
+  writeDb:
     connectionString: VAULT_DATA
     dbType: mysql
     migrationFilePath: migrations
@@ -27,7 +27,7 @@ logger:
   level: info
   devMode: false
   encoder: json
-jaeger:
+tracing:
   enable: true
   serviceName: base_service
   hostPort: VAULT_DATA
@@ -38,11 +38,11 @@ kafka:
     groupID: base_service_consumer
     initTopics: false
     numWorker: 20
-  topics:    
+  topics:
     userUpdate:
       topicName: user_update
       numPartitions: 10
-      replicationFactor: 1    
+      replicationFactor: 1
     userUpdated:
       topicName: s14e.base_service.user_updated
       numPartitions: 10
