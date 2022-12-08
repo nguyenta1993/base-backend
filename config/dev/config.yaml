@@ -33,6 +33,9 @@ tracing:
   hostPort: VAULT_DATA
   logSpans: false
 kafka:
+  dialer:
+    username: AGLMKA433JNXALY3
+    password: 8hG3ZfwlT77+8dNLSMMOB+Is0JXAGYCTH9fPm+FzzyYlZvuChC4rD50GrwXo/CXF
   config:
     brokers: VAULT_DATA
     groupID: base_service_consumer

@@ -5,7 +5,6 @@ import (
 
 	pb "base_service/internal/api/grpc/proto_gen"
 	createuser "base_service/internal/application/user/commands/create_user"
-	updateuser "base_service/internal/application/user/commands/update_user"
 	getuser "base_service/internal/application/user/queries/get_user"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -49,8 +48,8 @@ func (s *Server) CreateUser(ctx context.Context, in *pb.CreateUserRequest) (*pb.
 }
 
 func (s *Server) UpdateUser(ctx context.Context, in *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {
-	updateUserCommand := &updateuser.UpdateUserCommand{Username: in.GetUsername(), PhoneNumber: in.GetPhonenumber()}
-	success, err := s.UserService.UpdateUserHandler.Handle(ctx, updateUserCommand)
+	//updateUserCommand := &updateuser.UpdateUserCommand{Username: in.GetUsername(), PhoneNumber: in.GetPhonenumber()}
+	success, err := s.UserService.UpdateUserHandler.Handle(ctx)
 
 	if err != nil {
 		return nil, err

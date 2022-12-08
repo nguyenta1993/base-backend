@@ -1,12 +1,6 @@
 package startup
 
 import (
-	"context"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
-
 	"base_service/config"
 	"base_service/database"
 	"base_service/internal"
@@ -14,6 +8,11 @@ import (
 	v "base_service/internal/validation"
 	"base_service/pkg/healthcheck"
 	"base_service/pkg/metrics"
+	"context"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	// Just exmple, in the real world, using https://github.com/gogovan-korea/s14e-backend-proto
 	proto "base_service/internal/api/grpc/proto_gen"
@@ -57,12 +56,12 @@ func registerDependencies(ctx context.Context, logger logger.Logger) (*api.ApiCo
 	// Open database connection
 	readDb, writeDb := database.Open(cfg.Database, logger)
 	// Register kafka
-	kafkaProducer := kafka.NewProducer(logger, &k.Writer{
-		Addr:         k.TCP(cfg.Kafka.Config.Brokers...),
-		BatchTimeout: 1 * time.Nanosecond, // default 1 second
-		Async:        true,                // default false
-	})
-	// Register user service client conn
+
+	var dialer *kafka.DialerConfig
+	if cfg.Kafka.Dialer != nil {
+		dialer = &kafka.DialerConfig{Username: cfg.Kafka.Dialer.Username, Password: cfg.Kafka.Dialer.Password}
+	}
+	kafkaProducer := kafka.NewProducer(logger, cfg.Kafka.Config.Brokers, true, 5000*time.Millisecond, dialer)
 	// It's just example, it calls itself
 	userServiceClient := proto.NewUserServiceClient(client.NewClientConn(ctx, logger, cfg.GRPC.Port, true))
 	// Register redis client
@@ -82,7 +81,7 @@ func Execute() {
 
 	// Init commands
 	command.UseCommands(
-		command.WithStartCommand(start, cfg, "database.writeDb"),
+		command.WithStartCommand(start, cfg),
 	)
 }
 
@@ -112,7 +111,7 @@ func start() {
 		},
 	)
 	// Init tracing
-	tracing.UseOpenTelemetryWithNewRelic(tracing.Config(*cfg.Jaeger))
+	tracing.UseOpenTelemetry(tracing.Config(*cfg.Tracing))
 	// Init validation
 	validation.UseValidation(validation.CustomValidation{Tag: v.Tag, ValidatorFunc: v.AgeNotNegative})
 	// Run server

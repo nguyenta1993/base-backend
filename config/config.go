@@ -63,12 +63,17 @@ type TracingConfig struct {
 	HostPort    string `mapstructure:"hostPort"`
 	Enable      bool   `mapstructure:"enable"`
 	LogSpans    bool   `mapstructure:"logSpans"`
-	ApiKey      string `mapstructure:"apiKey"`
 }
 
 type KafkaConfig struct {
 	Config *KafkaConfigDetail `mapstructure:"config"`
 	Topics *KafkaTopics       `mapstructure:"topics"`
+	Dialer *KafkaDialer       `mapstructure:"dialer"`
+}
+
+type KafkaDialer struct {
+	Username string `mapstructure:"username"`
+	Password string `mapstructure:"password"`
 }
 
 type KafkaConfigDetail struct {

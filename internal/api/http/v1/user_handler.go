@@ -62,9 +62,8 @@ func (h *UserHandler) GetUser(c *gin.Context) {
 }
 
 func (h *UserHandler) Test(c *gin.Context) {
-	var result = 0
-	for {
-		result += 1
+	_, err := h.service.UserService.UpdateUserHandler.Handle(c.Request.Context())
+	if err != nil {
+		return
 	}
-	//c.JSON(200, result)
 }

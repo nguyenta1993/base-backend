@@ -27,8 +27,8 @@ func NewGetUserHandler(
 }
 
 func (h *GetUserHandler) Handle(ctx context.Context, getUserQuery *GetUserQuery) (user *User, err error) {
-	seg := tracing.StartSegmentFromCtx(ctx, "GetUserHandler.Handle")
-	defer seg.End()
+	ctx, span := tracing.StartSpanFromContext(ctx, "GetUserHandler.Handle")
+	defer span.End()
 
 	resp, err := h.userServiceClient.CreateUser(ctx, &proto.CreateUserRequest{Username: getUserQuery.Username})
 	if err != nil {

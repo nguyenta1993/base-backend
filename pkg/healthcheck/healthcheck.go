@@ -66,5 +66,11 @@ func readinessCheck(
 	health.AddReadinessCheck(constants.WriteDatabase, healthcheck.AsyncWithContext(ctx, func() error {
 		return writeDb.DB.PingContext(ctx)
 	}, interval))
+	health.AddReadinessCheck(constants.Kafka, healthcheck.AsyncWithContext(ctx, func() error {
+		if _, err := kafkaConn.Brokers(); err != nil {
+			return err
+		}
+		return nil
+	}, interval))
 
 }

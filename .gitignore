@@ -39,3 +39,4 @@
 
 zk-single-kafka-single
 .idea/
+client.properties

@@ -28,13 +28,13 @@ require (
 	google.golang.org/protobuf v1.28.1
 )
 
-replace github.com/gogovan-korea/ggx-kr-service-utils => ../../ggx-kr-service-utils
+//replace github.com/gogovan-korea/ggx-kr-service-utils => ../../ggx-kr-service-utils
 
 require (
 	github.com/avast/retry-go v3.0.0+incompatible
 	github.com/gammazero/workerpool v1.1.3
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/gogovan-korea/ggx-kr-service-utils v1.0.5
+	github.com/gogovan-korea/ggx-kr-service-utils v1.0.7
 	github.com/golang/mock v1.6.0
 	github.com/heptiolabs/healthcheck v0.0.0-20211123025425-613501dd5deb
 	github.com/prometheus/client_golang v1.14.0

@@ -33,6 +33,9 @@ tracing:
   hostPort: "jaeger:6831"
   logSpans: false
 kafka:
+  dialer:
+    username: AGLMKA433JNXALY3
+    password: 8hG3ZfwlT77+8dNLSMMOB+Is0JXAGYCTH9fPm+FzzyYlZvuChC4rD50GrwXo/CXF
   config:
     brokers: ["kafka1:9092"]
     groupID: base_service_consumer
